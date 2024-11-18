@@ -1,0 +1,44 @@
+name: ci 
+on:
+  push:
+    branches:
+      - master 
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - uses: actions/cache@v2
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+
+      - run: pip install mkdocs-material pillow cairosvg mkdocs-awesome-pages-plugin mike mkdocs-charts-plugin
+      # Build MkDocs projects in subdirectories
+      - run: mkdocs build
+      # create sitemap for SEO
+      # - run: python3 docs/sitemap.py
+      # Deploy to GitHub Pages
+      # - run: mkdocs gh-deploy --force
+      
+      # - run: git checkout -B gh-pages
+      #   # Assuming your index.html is in the root directory after mkdocs build
+      #   # You can adjust the path as necessary
+      # - run:  cp index.html site/
+      # - run:  cd site
+      # - run:  git add .
+      # - run:  git commit -m "Deploy to GitHub Pages"
+      # - run:  git push origin gh-pages --force
+
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+      # Uncomment and use the following if you have a custom domain
+      # - run: echo "collegehive.in" > ./site/CNAME
