@@ -1,0 +1,1 @@
+var __index = {"config":{"lang":["en"],"separator":"[\\s\\-,:!=\\[\\]()\"/]+|(?!\\b)(?=[A-Z][a-z])|\\.(?!\\d)|&[lg]t;","pipeline":["stopWordFilter"]},"docs":[{"location":"index.html","title":"Home","text":"Hive Notes                In collabration with Colleghive, Student Community.        Core Courses Topic Business Report Components"}]}
